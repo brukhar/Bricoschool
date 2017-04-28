@@ -1,0 +1,11 @@
+%h1 Création d'annonce
+
+= form_for :annonce, url: annonces_path do |f|
+  %p Titre :
+  = f.text_field :titre
+  %p Description
+  = f.text_area :descr, size: "60x12"
+  = f.submit "Créer"
+
+
+%h3 #{link_to "Retour", annonces_path}
