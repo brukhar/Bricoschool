@@ -1,8 +1,10 @@
 %h1 Liste des annonces
 
+%p.align-right #{link_to "S'inscrire", signup_path}
+
 %ul
   - @annonce.each do |annonce|
     %li
       %h3 #{link_to annonce.titre, annonce_path(annonce.id)}
 
-%p.align-right #{link_to "Créer une annonce", annonces_new_path}
+%p.align-right #{link_to "Créer une annonce", new_annonce_path}
