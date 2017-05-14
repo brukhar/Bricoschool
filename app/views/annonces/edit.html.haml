@@ -1,0 +1,11 @@
+%h1 Edition d'annonce
+
+= form_for(@annonce) do |f|
+  %p Titre
+  = f.text_field :titre
+  %p Descr
+  = f.text_area :descr, size: "60x12"
+  = f.submit "Sauvegarder les changements"
+
+
+%p.align-right #{link_to "Retour", annonces_path}
