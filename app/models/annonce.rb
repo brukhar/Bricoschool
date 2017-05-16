@@ -1,3 +1,3 @@
 class Annonce < ApplicationRecord
-  validates :titre, :descr, presence: true
+  validates :titre, :descr, :createur, presence: true
 end

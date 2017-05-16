@@ -22,9 +22,12 @@ class AnnoncesController < ApplicationController
   end
 
   def create
-    @annonce = Annonce.new(params.require(:annonce).permit(:titre, :descr))
+    if(connecte?)
+      @annonce = Annonce.new(params.require(:annonce).permit(:titre, :descr))
+      @annonce.createur = utilisateur_courant.id
 
-    @annonce.save
+      @annonce.save
+    end
     redirect_to @annonce
   end
 

@@ -1,7 +1,6 @@
 %h1= @annonce.titre
 %p= @annonce.descr
 
-%p #{link_to "Editer", edit_annonce_path(@annonce.id)}
-%p #{link_to "Supprimer", @annonce, method: :delete, data: { confirm: "You sure?" }}
-
-%p.align-right #{link_to "Retour", annonces_path}
+- if(connecte? && (utilisateur_courant.id == @annonce.createur))
+  %p #{link_to "Editer", edit_annonce_path(@annonce.id)}
+  %p #{link_to "Supprimer", @annonce, method: :delete, data: { confirm: "Vous êtes sûr?" }}

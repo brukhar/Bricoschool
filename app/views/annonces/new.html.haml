@@ -1,11 +1,17 @@
 %h1 Création d'annonce
 
-= form_for :annonce, url: annonces_path do |f|
-  %p Titre :
-  = f.text_field :titre
-  %p Description
-  = f.text_area :descr, size: "60x12"
-  = f.submit "Créer"
+- if(connecte?)
+  .row
+    .col-md-6.col-md-offset-3
+      = form_for :annonce, url: annonces_path do |f|
 
+        %p Titre :
+        = f.text_field :titre, class: 'form-control'
 
-%p.align-right #{link_to "Retour", annonces_path}
+        %p Description :
+        = f.text_area :descr, size: "60x12", class: 'form-control'
+
+        = f.submit "Créer", class: "btn btn-primary"
+
+- else
+  %p Vous devez #{link_to "vous connecter", login_path} pour créer une annonce.
