@@ -1,0 +1,9 @@
+%h1 Les annonces que vous avez acceptées
+
+%ul
+  - @annonce.each do |annonce|
+    - if annonce.preneur == session[:utilisateur_id]
+      %li
+        %h3 #{link_to annonce.titre, annonce_path(annonce.id)}
+
+%p.align-right #{link_to "Créer une annonce", new_annonce_path}

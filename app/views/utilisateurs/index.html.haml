@@ -1,0 +1,10 @@
+%h1 Liste des professionnels
+
+%ul
+  - @utilisateur.each do |utilisateur|
+    - if utilisateur.compte == 'professionnel'
+      %li
+        %h3
+          =link_to utilisateur_path(utilisateur.id) do
+            = utilisateur.prenom
+            = utilisateur.nom

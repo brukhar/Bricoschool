@@ -14,6 +14,12 @@
       %p Email :
       = f.email_field :email, class: 'form-control'
 
+      %p Numéro de téléphone :
+      = f.text_field :numero, class: 'form-control'
+
+      %p Etes-vous un professionnel?
+      = f.select(:compte, [['Non', "consommateur"], ['Oui', "professionnel"]])
+
       %p Mot de passe :
       = f.password_field :password, class: 'form-control'
 

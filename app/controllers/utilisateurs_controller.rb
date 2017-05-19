@@ -1,4 +1,7 @@
 class UtilisateursController < ApplicationController
+  def index
+    @utilisateur = Utilisateur.all
+  end
 
   def show
     @utilisateur = Utilisateur.find(params[:id])
@@ -20,7 +23,7 @@ class UtilisateursController < ApplicationController
   private
 
     def utilisateur_params
-      params.require(:utilisateur).permit(:nom, :prenom, :email, :password,
+      params.require(:utilisateur).permit(:nom, :prenom, :email, :numero, :compte, :password,
                                    :password_confirmation)
     end
 end

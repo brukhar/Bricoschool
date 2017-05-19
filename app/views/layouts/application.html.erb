@@ -14,6 +14,7 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <div><%= flash[:info] %></div>
     <div class="container">
       <%= yield %>
     </div>

@@ -14,4 +14,12 @@ module SessionsHelper
   def connecte?
     !utilisateur_courant.nil?
   end
+
+  def pro_connecte?
+    utilisateur_courant.compte != "consommateur"
+  end
+
+  def admin_connecte?
+    utilisateur_courant.compte == "admin"
+  end
 end

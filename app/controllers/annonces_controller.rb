@@ -5,6 +5,8 @@ class AnnoncesController < ApplicationController
 
   def show
     @annonce = Annonce.find(params[:id])
+    @createur = Utilisateur.find(@annonce.createur)
+    @preneur = Utilisateur.find(@annonce.preneur)
   end
 
   def edit
@@ -34,5 +36,29 @@ class AnnoncesController < ApplicationController
   def destroy
     Annonce.find(params[:id]).destroy
     redirect_to Annonce
+  end
+
+  def accepter
+    Annonce.find(params[:id]).update preneur: session[:utilisateur_id]
+    redirect_to Annonce
+  end
+
+  def annuler
+    Annonce.find(params[:id]).update preneur: nil
+    redirect_to Annonce
+  end
+
+  def miennes
+    if !connecte?
+      redirect_to Annonce
+    end
+    @annonce = Annonce.all
+  end
+
+  def travaux
+    if !connecte? || !pro_connecte?
+      redirect_to Annonce
+    end
+    @annonce = Annonce.all
   end
 end

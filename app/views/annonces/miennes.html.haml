@@ -1,0 +1,9 @@
+%h1 Vos annonces
+
+%ul
+  - @annonce.each do |annonce|
+    - if annonce.createur == session[:utilisateur_id]
+      %li
+        %h3 #{link_to annonce.titre, annonce_path(annonce.id)}
+
+%p.align-right #{link_to "Créer une annonce", new_annonce_path}

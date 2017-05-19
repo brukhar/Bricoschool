@@ -1,4 +1,8 @@
 %h2
   = gravatar_for @utilisateur
-  = @utilisateur.nom
   = @utilisateur.prenom
+  = @utilisateur.nom
+
+%p
+  Statut :
+  = @utilisateur.compte

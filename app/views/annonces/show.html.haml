@@ -1,6 +1,24 @@
 %h1= @annonce.titre
 %p= @annonce.descr
 
-- if(connecte? && (utilisateur_courant.id == @annonce.createur))
+%p.align-right
+  Annonce proposée par :
+  =link_to utilisateur_path(@createur.id) do
+    = @createur.prenom
+    = @createur.nom
+
+- if(connecte? && (admin_connecte? || (utilisateur_courant.id == @annonce.createur)))
+  - if(@preneur)
+    %p.align-right
+      Annonce acceptée par :
+      =link_to utilisateur_path(@preneur.id) do
+        = @preneur.prenom
+        = @preneur.nom
   %p #{link_to "Editer", edit_annonce_path(@annonce.id)}
   %p #{link_to "Supprimer", @annonce, method: :delete, data: { confirm: "Vous êtes sûr?" }}
+
+- elsif(connecte? && pro_connecte? && (@annonce.preneur == nil))
+  %h4 #{link_to "Accepter l'annonce", @annonce, method: :patch ,data: { confirm: "Etes-vous sûr?"}}
+
+- else(connecte? && pro_connecte? && (@annonce.preneur == session[:utilisateur_id]))
+  %h4 #{link_to "Annuler l'acceptation", annonces_annuler_path(@annonce), method: :patch ,data: { confirm: "Etes-vous sûr?"}}
