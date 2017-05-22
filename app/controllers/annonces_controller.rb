@@ -17,9 +17,12 @@ class AnnoncesController < ApplicationController
 
   def update
     @annonce = Annonce.find(params[:id])
-    @annonce.update_attributes(params.require(:annonce).permit(:titre, :descr))
-
-    redirect_to @annonce
+    if (@annonce.update_attributes(params.require(:annonce).permit(:titre, :descr, :logo)))
+      @annonce.save
+      redirect_to @annonce
+    else
+      render 'edit'
+    end
   end
 
   def new
@@ -27,7 +30,7 @@ class AnnoncesController < ApplicationController
 
   def create
     if(connecte?)
-      @annonce = Annonce.new(params.require(:annonce).permit(:titre, :descr))
+      @annonce = Annonce.new(params.require(:annonce).permit(:titre, :descr, :logo))
       @annonce.createur = utilisateur_courant.id
 
       @annonce.save

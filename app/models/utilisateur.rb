@@ -19,5 +19,6 @@ class Utilisateur < ApplicationRecord
   validates :compte, presence: true
   validates_with BonType
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  dragonfly_accessor :logo
 end

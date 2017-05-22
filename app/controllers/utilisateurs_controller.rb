@@ -29,15 +29,17 @@ class UtilisateursController < ApplicationController
 
   def update
     @utilisateur = Utilisateur.find(params[:id])
-    @utilisateur.update_attributes(params.require(:utilisateur).permit(:email, :numero, :descr))
-
-    redirect_to @utilisateur
+    if @utilisateur.update_attributes(params.require(:utilisateur).permit(:email, :numero, :descr, :logo))
+      redirect_to @utilisateur
+    else
+      render 'edit'
+    end
   end
 
   private
 
     def utilisateur_params
-      params.require(:utilisateur).permit(:nom, :prenom, :email, :numero, :compte, :password,
+      params.require(:utilisateur).permit(:nom, :prenom, :email, :numero, :descr, :logo, :compte, :password,
                                    :password_confirmation)
     end
 end

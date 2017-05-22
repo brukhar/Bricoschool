@@ -1,11 +1,17 @@
 %h2
-  = gravatar_for @utilisateur
+  - if(@utilisateur.logo)
+    = image_tag @utilisateur.logo.thumb("300x150").url
+  - else
+    = gravatar_for @utilisateur
   = @utilisateur.prenom
   = @utilisateur.nom
 
 %p
   Statut :
   = @utilisateur.compte
+
+%h4
+  = @utilisateur.descr
 
 - if(connecte? && (admin_connecte? || (utilisateur_courant.id == @utilisateur.id)))
   .align-right

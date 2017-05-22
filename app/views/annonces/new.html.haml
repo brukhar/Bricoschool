@@ -11,6 +11,9 @@
         %p Description :
         = f.text_area :descr, size: "60x12", class: 'form-control'
 
+        %p Photo :
+        = f.file_field :logo
+
         = f.submit "Créer", class: "btn btn-primary"
 
 - else

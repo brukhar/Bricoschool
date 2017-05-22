@@ -3,6 +3,7 @@
 
 body {
   padding-top: 60px;
+  background-color: #F5F5F5;
 }
 
 section {
@@ -48,4 +49,20 @@ textarea {
     color: white;
     text-decoration: none;
   }
+}
+
+.navbar {
+  background-color: #8B4513;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: #A0522D;
+}
+
+.dropdown-toggle {
+  background-color: #8B4513;
+}
+
+.dropdown-menu {
+  background-color: #F5F5F5;
 }

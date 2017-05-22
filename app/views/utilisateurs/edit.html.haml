@@ -2,7 +2,8 @@
 
 .row
   .col-md-6.col-md-offset-3
-    = form_for(@utilisateur) do |f|
+    = form_for @utilisateur, url: {action: "update"} do |f|
+      = render 'shared/error_messages'
 
       %p Email :
       = f.email_field :email, class: 'form-control'
@@ -10,8 +11,11 @@
       %p Numéro de téléphone :
       = f.text_field :numero, class: 'form-control'
 
+      %p Avatar :
+      = f.file_field :logo
+
       - if pro_connecte?
         %p Descr :
         = f.text_area :descr, size: "60x12"
 
-      = f.submit "Sauvegarder les changements"
+      = f.submit "Sauvegarder les changements", class: "btn btn-primary"

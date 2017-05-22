@@ -1,6 +1,9 @@
 %h1= @annonce.titre
 %p= @annonce.descr
 
+- if(@annonce.logo)
+  = image_tag @annonce.logo.thumb("600x300").url
+
 %p.align-right
   Annonce proposée par :
   =link_to utilisateur_path(@createur.id) do

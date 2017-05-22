@@ -2,7 +2,7 @@
 
 .row
   .col-md-6.col-md-offset-3
-    = form_for :utilisateur, url: utilisateurs_path do |f|
+    = form_for :utilisateur, :html => { :multipart => true}, url: utilisateurs_path do |f|
       = render 'shared/error_messages'
 
       %p Nom :
@@ -19,6 +19,9 @@
 
       %p Etes-vous un professionnel?
       = f.select(:compte, [['Non', "consommateur"], ['Oui', "professionnel"]])
+
+      %p Avatar :
+      = f.file_field :logo
 
       %p Mot de passe :
       = f.password_field :password, class: 'form-control'
