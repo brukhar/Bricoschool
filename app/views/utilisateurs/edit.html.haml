@@ -1,0 +1,17 @@
+%h1 Edition de compte
+
+.row
+  .col-md-6.col-md-offset-3
+    = form_for(@utilisateur) do |f|
+
+      %p Email :
+      = f.email_field :email, class: 'form-control'
+
+      %p Numéro de téléphone :
+      = f.text_field :numero, class: 'form-control'
+
+      - if pro_connecte?
+        %p Descr :
+        = f.text_area :descr, size: "60x12"
+
+      = f.submit "Sauvegarder les changements"

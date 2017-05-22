@@ -18,7 +18,9 @@
   %p #{link_to "Supprimer", @annonce, method: :delete, data: { confirm: "Vous êtes sûr?" }}
 
 - elsif(connecte? && pro_connecte? && (@annonce.preneur == nil))
-  %h4 #{link_to "Accepter l'annonce", @annonce, method: :patch ,data: { confirm: "Etes-vous sûr?"}}
+  =form_tag @annonce, method: "patch", data: { confirm: "Etes-vous sûr?"} do
+    = submit_tag "Accepter l'annonce", class: "btn btn-primary"
 
-- else(connecte? && pro_connecte? && (@annonce.preneur == session[:utilisateur_id]))
-  %h4 #{link_to "Annuler l'acceptation", annonces_annuler_path(@annonce), method: :patch ,data: { confirm: "Etes-vous sûr?"}}
+- elsif(connecte? && pro_connecte? && (@annonce.preneur == session[:utilisateur_id]))
+  =form_tag annonces_annuler_path(@annonce), method: "patch" do
+    = submit_tag "Annuler l'acceptation", class: "btn btn-primary", data: { confirm: "Etes-vous sûr?" }

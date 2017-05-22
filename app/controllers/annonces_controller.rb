@@ -6,7 +6,9 @@ class AnnoncesController < ApplicationController
   def show
     @annonce = Annonce.find(params[:id])
     @createur = Utilisateur.find(@annonce.createur)
-    @preneur = Utilisateur.find(@annonce.preneur)
+    if(@annonce.preneur)
+      @preneur = Utilisateur.find(@annonce.preneur)
+    end
   end
 
   def edit
@@ -39,13 +41,15 @@ class AnnoncesController < ApplicationController
   end
 
   def accepter
-    Annonce.find(params[:id]).update preneur: session[:utilisateur_id]
-    redirect_to Annonce
+    @annonce = Annonce.find(params[:id])
+    @annonce.update preneur: session[:utilisateur_id]
+    redirect_to @annonce
   end
 
   def annuler
-    Annonce.find(params[:id]).update preneur: nil
-    redirect_to Annonce
+    @annonce = Annonce.find(params[:id])
+    @annonce.update preneur: nil
+    redirect_to @annonce
   end
 
   def miennes

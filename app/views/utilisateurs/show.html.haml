@@ -6,3 +6,8 @@
 %p
   Statut :
   = @utilisateur.compte
+
+- if(connecte? && (admin_connecte? || (utilisateur_courant.id == @utilisateur.id)))
+  .align-right
+    =form_tag edit_utilisateur_path(@utilisateur), method: "get" do
+      = submit_tag "Mettre mon compte à jour", class: "btn btn-primary"
