@@ -5,6 +5,9 @@ class UtilisateursController < ApplicationController
 
   def show
     @utilisateur = Utilisateur.find(params[:id])
+    if(@utilisateur.secteur)
+      @secteur = Secteur.find(@utilisateur.secteur)
+    end
   end
 
   def new
@@ -14,7 +17,14 @@ class UtilisateursController < ApplicationController
   def create
     @utilisateur = Utilisateur.new(utilisateur_params)
     if @utilisateur.save
-      redirect_to @utilisateur
+
+      log_in(@utilisateur)
+
+      if(@utilisateur.compte != "consommateur")
+        redirect_to edit_utilisateur_path(@utilisateur)
+      else
+        redirect_to @utilisateur
+      end
     else
       render 'new'
     end
@@ -22,6 +32,7 @@ class UtilisateursController < ApplicationController
 
   def edit
     @utilisateur = Utilisateur.find(params[:id])
+    @secteur = Secteur.all
     if !connecte?
       redirect_to @utilisateur
     end
@@ -29,9 +40,10 @@ class UtilisateursController < ApplicationController
 
   def update
     @utilisateur = Utilisateur.find(params[:id])
-    if @utilisateur.update_attributes(params.require(:utilisateur).permit(:email, :numero, :descr, :logo))
+    if @utilisateur.update_attributes(params.require(:utilisateur).permit(:email, :numero, :secteur, :descr, :logo))
       redirect_to @utilisateur
     else
+      @secteur = Secteur.all
       render 'edit'
     end
   end

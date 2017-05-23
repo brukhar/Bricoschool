@@ -1,15 +1,22 @@
-%h1 Création d'annonce
+.center
+  %h1 Création d'annonce
 
 - if(connecte?)
   .row
     .col-md-6.col-md-offset-3
       = form_for :annonce, url: annonces_path do |f|
+        = render 'shared/error_messagesAnnonces'
 
         %p Titre :
         = f.text_field :titre, class: 'form-control'
 
         %p Description :
         = f.text_area :descr, size: "60x12", class: 'form-control'
+
+        %p A quel secteur d'activité correspond votre annonce?
+        = f.select(:secteur) do
+          - @secteur.each do |s|
+            = content_tag(:option, s.nom, value: s.id)
 
         %p Photo :
         = f.file_field :logo

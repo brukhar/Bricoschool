@@ -1,9 +1,22 @@
-%h1 Liste des annonces
+.center
+  %h1 Liste des annonces
+
+=form_tag annonces_search_path, method: "get" do
+
+  = label_tag(:secteur, "Secteur?")
+
+  = select_tag(:secteur, options_from_collection_for_select(@secteur, :id, :nom))
+  %p
+  = submit_tag "Rechercher", class: "btn btn-primary"
 
 %ul
   - @annonce.each do |annonce|
-    %li
-      %h3 #{link_to annonce.titre, annonce_path(annonce.id)}
+    .col-md-6.col-md-offset-3
+      %li
+        %h3 #{link_to annonce.titre, annonce_path(annonce.id)}
+        -if (annonce.logo)
+          = image_tag annonce.logo.thumb("400x200").url
+        %h3.plus_bas
 
 - if(connecte?)
   %p.align-right #{link_to "Créer une annonce", new_annonce_path}

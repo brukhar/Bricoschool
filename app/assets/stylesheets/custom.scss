@@ -6,6 +6,10 @@ body {
   background-color: #F5F5F5;
 }
 
+p {
+  text-align:justify;
+}
+
 section {
   overflow: auto;
 }
@@ -20,10 +24,32 @@ textarea {
 
 .center h1 {
   margin-bottom: 10px;
+  color: #701000;
 }
 
 .align-right {
   text-align: right;
+}
+
+a {
+  color: #D00000;
+  &:hover {
+    color: #F00000;
+    text-decoration: none;
+  }
+  &:focus {
+    color: #F00000;
+    text-decoration: none;
+  }
+}
+
+.gras {
+  font-weight: bold;
+  display: inline;
+  color: #8B4513
+}
+.tab {
+  text-indent: 2em;
 }
 
 #error_explanation {
@@ -65,4 +91,38 @@ textarea {
 
 .dropdown-menu {
   background-color: #F5F5F5;
+}
+
+.dropdown-menu > li > a:hover {
+  background-color: #DCDCDC;
+}
+
+.plus_bas {
+  margin-bottom: 60px;
+}
+
+.btn-primary {
+  background-color: #8B4513;
+  border-color: #904020;
+  transition-duration: 0.5s;
+  &:hover {
+    background-color: #A0522D;
+    border-color: #904020;
+    &:active {
+      background-color: #A0522D;
+      border-color: #904020;
+    }
+  }
+  &:focus {
+    background-color: #904020;
+    border-color: #904020;
+    &:active {
+      background-color: #A0522D;
+      border-color: #904020;
+    }
+  }
+  &:active {
+    background-color: #A0522D;
+    border-color: #904020;
+  }
 }

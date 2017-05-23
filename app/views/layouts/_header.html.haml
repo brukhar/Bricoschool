@@ -3,7 +3,7 @@
     #{link_to "Bricoschool", root_path, id: "logo"}
     %nav
       %ul{:class => "nav navbar-nav navbar-right"}
-        %li #{link_to "Annonces", root_path}
+        %li #{link_to "Annonces", annonces_path}
         %li #{link_to "Professionnels", utilisateurs_path}
         - if connecte?
           %li{:class => "dropdown"}

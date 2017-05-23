@@ -1,0 +1,11 @@
+.center
+  %h1 Création de Secteur d'activité
+
+.row
+  .col-md-6.col-md-offset-3
+    = form_for :secteur, url: {action: "create"} do |f|
+
+      %p Secteur :
+      = f.text_field :nom, class: 'form-control'
+
+      = f.submit "Créer", class: "btn btn-primary"

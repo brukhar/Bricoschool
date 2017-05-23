@@ -1,0 +1,10 @@
+- if @annonce.errors.any?
+  #error_explanation
+    .alert.alert-danger
+      Il y a
+      = @annonce.errors.count
+      erreurs dans votre formulaire
+    %ul
+    - @annonce.errors.full_messages.each do |msg|
+      %li
+        = msg

@@ -10,6 +10,12 @@
   Statut :
   = @utilisateur.compte
 
+- if (@utilisateur.compte == "professionnel") && (@secteur)
+  %h4
+    Secteur d'activité :
+    .gras
+      = @secteur.nom
+
 %h4
   = @utilisateur.descr
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522151424) do
+ActiveRecord::Schema.define(version: 20170523125432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170522151424) do
     t.integer "createur"
     t.integer "preneur"
     t.string "logo_uid"
+    t.integer "secteur"
   end
 
   create_table "branche_pros", force: :cascade do |t|
@@ -41,6 +42,12 @@ ActiveRecord::Schema.define(version: 20170522151424) do
   create_table "photos", force: :cascade do |t|
     t.string "image_uid"
     t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "secteurs", force: :cascade do |t|
+    t.string "nom"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170522151424) do
     t.string "compte"
     t.string "descr"
     t.string "logo_uid"
+    t.integer "secteur"
     t.index ["email"], name: "index_utilisateurs_on_email", unique: true
   end
 

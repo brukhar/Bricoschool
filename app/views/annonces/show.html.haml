@@ -1,5 +1,11 @@
-%h1= @annonce.titre
+.center
+  %h1= @annonce.titre
 %p= @annonce.descr
+
+- if(@secteur)
+  %p.align-right
+    Secteur de l'annonce :
+    = @secteur.nom
 
 - if(@annonce.logo)
   = image_tag @annonce.logo.thumb("600x300").url
@@ -10,18 +16,22 @@
     = @createur.prenom
     = @createur.nom
 
+- if(@preneur)
+  %p.align-right
+    Annonce acceptée par :
+    =link_to utilisateur_path(@preneur.id) do
+      = @preneur.prenom
+      = @preneur.nom
 - if(connecte? && (admin_connecte? || (utilisateur_courant.id == @annonce.createur)))
-  - if(@preneur)
-    %p.align-right
-      Annonce acceptée par :
-      =link_to utilisateur_path(@preneur.id) do
-        = @preneur.prenom
-        = @preneur.nom
   %p #{link_to "Editer", edit_annonce_path(@annonce.id)}
   %p #{link_to "Supprimer", @annonce, method: :delete, data: { confirm: "Vous êtes sûr?" }}
 
+  -if @preneur
+    =form_tag annonces_annuler_path(@annonce), method: "patch" do
+      = submit_tag "Refuser le professionnel", class: "btn btn-primary", data: { confirm: "Etes-vous sûr?" }
+
 - elsif(connecte? && pro_connecte? && (@annonce.preneur == nil))
-  =form_tag @annonce, method: "patch", data: { confirm: "Etes-vous sûr?"} do
+  =form_tag annonces_accepter_path, method: "patch", data: { confirm: "Etes-vous sûr?"} do
     = submit_tag "Accepter l'annonce", class: "btn btn-primary"
 
 - elsif(connecte? && pro_connecte? && (@annonce.preneur == session[:utilisateur_id]))

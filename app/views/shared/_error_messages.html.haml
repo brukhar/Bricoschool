@@ -1,8 +1,10 @@
 - if @utilisateur.errors.any?
   #error_explanation
     .alert.alert-danger
-      The form contains = pluralize(@utilisateur.errors.count, "error")
-    ul
+      Il y a
+      = @utilisateur.errors.count
+      erreurs dans votre formulaire
+    %ul
     - @utilisateur.errors.full_messages.each do |msg|
       %li
         = msg

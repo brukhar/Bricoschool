@@ -1,4 +1,5 @@
-%h1 Edition de compte
+.center
+  %h1 Edition de compte
 
 .row
   .col-md-6.col-md-offset-3
@@ -15,6 +16,11 @@
       = f.file_field :logo
 
       - if pro_connecte?
+        %p Dans quelle branche travaillez-vous?
+        = f.select(:secteur) do
+          - @secteur.each do |s|
+            = content_tag(:option, s.nom, value: s.id)
+
         %p Descr :
         = f.text_area :descr, size: "60x12"
 
