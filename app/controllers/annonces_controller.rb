@@ -23,7 +23,11 @@ class AnnoncesController < ApplicationController
 
   def edit
     @annonce = Annonce.find(params[:id])
-    @secteur = Secteur.all
+    if (connecte? && (admin_connecte? || (sessions[:utilisateur_id] == @annonce.createur)))
+      @secteur = Secteur.all
+    else
+      redirect_to root_path
+    end
   end
 
   def update
@@ -38,8 +42,12 @@ class AnnoncesController < ApplicationController
   end
 
   def new
-    @annonce = Annonce.new
-    @secteur = Secteur.all
+    if(connecte?)
+      @annonce = Annonce.new
+      @secteur = Secteur.all
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -59,19 +67,25 @@ class AnnoncesController < ApplicationController
   end
 
   def destroy
-    Annonce.find(params[:id]).destroy
+    if(connecte? && (admin_connecte? || (sessions[:utilisateur_id] == @annonce.createur)))
+      Annonce.find(params[:id]).destroy
+    end
     redirect_to Annonce
   end
 
   def accepter
     @annonce = Annonce.find(params[:id])
-    @annonce.update preneur: session[:utilisateur_id]
+    if(connecte? && pro_connecte?)
+      @annonce.update preneur: session[:utilisateur_id]
+    end
     redirect_to @annonce
   end
 
   def annuler
     @annonce = Annonce.find(params[:id])
-    @annonce.update preneur: nil
+    if(connecte? && ((session[:utilisateur_id] == @annonce.createur) || (session[:utilisateur_id] == @annonce.preneur) || admin_connecte?))
+      @annonce.update preneur: nil
+    end
     redirect_to @annonce
   end
 

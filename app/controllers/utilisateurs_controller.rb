@@ -31,9 +31,10 @@ class UtilisateursController < ApplicationController
   end
 
   def edit
-    @utilisateur = Utilisateur.find(params[:id])
-    @secteur = Secteur.all
-    if !connecte?
+    if(connecte? && (admin_connecte? || (session[:utilisateur_id] == params[:id])))
+      @utilisateur = Utilisateur.find(params[:id])
+      @secteur = Secteur.all
+    else
       redirect_to @utilisateur
     end
   end
